@@ -4,6 +4,7 @@ const transactionList = document.getElementById("transaction-list");
 const dateInput = document.getElementById("date");
 const typeInput = document.getElementById("type");
 const categoryInput = document.getElementById("category");
+const walletInput = document.getElementById("wallet");
 const amountInput = document.getElementById("amount");
 const noteInput = document.getElementById("note");
 const totalIncomeElement = document.getElementById("total-income");
@@ -88,6 +89,9 @@ function renderTransactions() {
     const date = document.createElement("p");
     date.textContent = transaction.date;
 
+    const wallet = document.createElement("p");
+    wallet.textContent = "Dompet: " + (transaction.wallet || "Usaha");
+
     const note = document.createElement("p");
     note.textContent = transaction.note || "Tanpa catatan";
 
@@ -123,7 +127,7 @@ function renderTransactions() {
       }
     });
 
-    info.append(title, date, note, amount);
+    info.append(title, date, wallet, note, amount);
     item.append(info, deleteButton);
     transactionList.appendChild(item);
   });
@@ -141,6 +145,7 @@ transactionForm.addEventListener("submit", (event) => {
     !dateInput.value ||
     !typeInput.value ||
     !categoryInput.value ||
+    !walletInput.value ||
     amountInput.value.trim() === ""
   ) {
     errorMessage.textContent = "Lengkapi semua data wajib terlebih dahulu.";
@@ -158,6 +163,7 @@ transactionForm.addEventListener("submit", (event) => {
     date: dateInput.value,
     type: typeInput.value,
     category: categoryInput.value,
+    wallet: walletInput.value,
     amount: amount,
     note: noteInput.value.trim(),
     createdAt: Date.now()

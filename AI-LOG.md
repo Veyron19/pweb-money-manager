@@ -30,7 +30,7 @@
 ## 2. Bug Validasi Nominal
 - Prompt: Meminta bantuan membuat contoh bug pada validasi nominal transaksi.
 - Dipakai: Sebagai referensi untuk mengubah kondisi validasi di script.js agar nominal nol bisa lolos dari pemeriksaan JavaScript.
-- Diubah: Mengubah kondisi validasi dari `amount <= 0` menjadi `amount < 0`. Validasi HTML masih perlu diuji untuk memastikan apakah nominal nol bisa masuk.
+- Diubah: Mengubah kondisi validasi dari amount <= 0 menjadi amount < 0. Validasi HTML disesuaikan menggunakan novalidate agar nominal nol bisa diuji.
 
 ## 3. Bug Urutan Transaksi
 - Prompt: Meminta bantuan membuat contoh bug pada pengurutan daftar transaksi.
@@ -38,6 +38,22 @@
 - Diubah: Mengubah urutan dari transaksi terbaru ke terlama menjadi terlama ke terbaru untuk membuat bug yang bisa diuji.
 
 ## 4. Dokumentasi dan Evaluasi
-- Prompt: Tolong bantu merapikan dokumentasi proses pengerjaan Money Manager dan AI Log berdasarkan checkpoint.
+- Prompt: Tolong bantu merapikan proses pengerjaan Money Manager dan AI Log berdasarkan checkpoint.
 - Dipakai: Sebagai acuan untuk mencatat perubahan kode, proses pengerjaan, dan pengujian bug.
 - Diubah: Memisahkan catatan berdasarkan checkpoint dan menyesuaikan isinya dengan perkembangan aplikasi.
+
+## 5. Perbaikan Bug
+- Prompt: Bantu perbaiki bug validasi nominal dan urutan transaksi yang sebelumnya dibuat.
+- Dipakai: Sebagai referensi untuk memperbaiki validasi nominal dan pengurutan daftar transaksi pada script.js.
+- Diubah: Mengembalikan kondisi validasi dari amount < 0 menjadi amount <= 0 agar nominal nol dan angka negatif ditolak. Pengurutan juga dikembalikan dari terlama ke terbaru menjadi terbaru ke terlama agar transaksi terbaru tampil di bagian atas.
+
+# AI Log - Checkpoint 3
+## 1. Penambahan Fitur Bonus
+- Prompt: Apa fitur bonus yang sederhana dan sesuai untuk aplikasi Money Manager dengan persona Pedagang Kecil?
+- Dipakai: Sebagai referensi untuk menentukan fitur tambahan yang bisa membantu pengguna membedakan transaksi pribadi dan usaha.
+- Diubah: Menambahkan pilihan dompet Pribadi dan Usaha pada formulir transaksi, menyimpan pilihan dompet bersama data transaksi, dan menampilkan informasi dompet pada daftar transaksi.
+
+## 2. Pengujian Fitur
+- Prompt: Bantu tentukan cara menguji perbaikan bug dan fitur bonus pada aplikasi Money Manager.
+- Dipakai: Sebagai acuan untuk memeriksa validasi nominal, urutan transaksi, dan pilihan dompet.
+- Diubah: Menyesuaikan langkah pengujian dengan fitur yang sudah ditambahkan agar setiap fungsi dapat diperiksa secara bertahap.
