@@ -65,7 +65,7 @@ function renderTransactions() {
   transactionList.replaceChildren();
 
   const sortedTransactions = [...transactions].sort(
-    (a, b) => a.createdAt - b.createdAt
+    (a, b) => b.createdAt - a.createdAt
   );
 
   if (sortedTransactions.length === 0) {
@@ -147,8 +147,8 @@ transactionForm.addEventListener("submit", (event) => {
     return;
   }
 
-  if (!Number.isFinite(amount) || amount < 0) {
-    errorMessage.textContent = "Nominal tidak boleh negatif.";
+  if (!Number.isFinite(amount) || amount <= 0) {
+    errorMessage.textContent = "Nominal harus lebih dari Rp0.";
     amountInput.focus();
     return;
   }
