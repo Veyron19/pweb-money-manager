@@ -1,20 +1,28 @@
 
-const transactionForm = document.getElementById("transactionForm");
-const transactionList = document.getElementById("transactionList");
+const transactionForm = document.getElementById("transaction-form");
+const transactionList = document.getElementById("transaction-list");
 const dateInput = document.getElementById("date");
 const typeInput = document.getElementById("type");
 const categoryInput = document.getElementById("category");
 const amountInput = document.getElementById("amount");
 const noteInput = document.getElementById("note");
+const totalIncomeElement = document.getElementById("total-income");
+const totalExpenseElement = document.getElementById("total-expense");
+const balanceElement = document.getElementById("balance");
+const errorMessage = document.getElementById("error-message");
 
 const STORAGE_KEY = "moneyManagerTransactions";
 
 let transactions = [];
 
+const rupiah = new Intl.NumberFormat("id-ID", {
+  style: "currency",
+  currency: "IDR",
+  maximumFractionDigits: 0
+});
+
 try {
-  const savedTransactions = JSON.parse(
-    localStorage.getItem(STORAGE_KEY)
-  );
+  const savedTransactions = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
   if (Array.isArray(savedTransactions)) {
     transactions = savedTransactions.filter((transaction) =>
@@ -33,26 +41,31 @@ try {
   transactions = [];
 }
 
-const rupiah = new Intl.NumberFormat("id-ID", {
-  style: "currency",
-  currency: "IDR",
-  maximumFractionDigits: 0
-});
-
 dateInput.value = new Date().toLocaleDateString("en-CA");
 
 function saveTransactions() {
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(transactions)
-  );
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
+}
+
+function updateSummary() {
+  const totalIncome = transactions
+    .filter((transaction) => transaction.type === "income")
+    .reduce((total, transaction) => total + transaction.amount, 0);
+
+  const totalExpense = transactions
+    .filter((transaction) => transaction.type === "expense")
+    .reduce((total, transaction) => total + transaction.amount, 0);
+
+  totalIncomeElement.textContent = rupiah.format(totalIncome);
+  totalExpenseElement.textContent = rupiah.format(totalExpense);
+  balanceElement.textContent = rupiah.format(totalIncome - totalExpense);
 }
 
 function renderTransactions() {
   transactionList.replaceChildren();
 
   const sortedTransactions = [...transactions].sort(
-    (a, b) => b.createdAt - a.createdAt
+    (a, b) => a.createdAt - b.createdAt
   );
 
   if (sortedTransactions.length === 0) {
@@ -60,7 +73,6 @@ function renderTransactions() {
     message.className = "empty-message";
     message.textContent = "Belum ada transaksi.";
     transactionList.appendChild(message);
-    return;
   }
 
   sortedTransactions.forEach((transaction) => {
@@ -92,18 +104,14 @@ function renderTransactions() {
     deleteButton.textContent = "Hapus";
 
     deleteButton.addEventListener("click", () => {
-      const confirmed = confirm(
-        "Yakin ingin menghapus transaksi ini?"
-      );
-
-      if (!confirmed) {
+      if (!confirm("Yakin ingin menghapus transaksi ini?")) {
         return;
       }
 
       const previousTransactions = transactions;
 
       transactions = transactions.filter(
-        (item) => item.id !== transaction.id
+        (entry) => entry.id !== transaction.id
       );
 
       try {
@@ -111,7 +119,7 @@ function renderTransactions() {
         renderTransactions();
       } catch {
         transactions = previousTransactions;
-        alert("Transaksi gagal dihapus. Coba lagi.");
+        errorMessage.textContent = "Transaksi gagal dihapus. Coba lagi.";
       }
     });
 
@@ -119,19 +127,28 @@ function renderTransactions() {
     item.append(info, deleteButton);
     transactionList.appendChild(item);
   });
+
+  updateSummary();
 }
 
 transactionForm.addEventListener("submit", (event) => {
   event.preventDefault();
-
-  if (!transactionForm.reportValidity()) {
-    return;
-  }
+  errorMessage.textContent = "";
 
   const amount = Number(amountInput.value);
 
-  if (!Number.isFinite(amount) || amount <= 0) {
-    alert("Nominal harus lebih dari 0.");
+  if (
+    !dateInput.value ||
+    !typeInput.value ||
+    !categoryInput.value ||
+    amountInput.value.trim() === ""
+  ) {
+    errorMessage.textContent = "Lengkapi semua data wajib terlebih dahulu.";
+    return;
+  }
+
+  if (!Number.isFinite(amount) || amount < 0) {
+    errorMessage.textContent = "Nominal tidak boleh negatif.";
     amountInput.focus();
     return;
   }
@@ -155,10 +172,10 @@ transactionForm.addEventListener("submit", (event) => {
     renderTransactions();
   } catch {
     transactions = transactions.filter(
-      (item) => item.id !== transaction.id
+      (entry) => entry.id !== transaction.id
     );
 
-    alert("Data gagal disimpan. Periksa penyimpanan browser.");
+    errorMessage.textContent = "Data gagal disimpan. Periksa penyimpanan browser.";
   }
 });
 

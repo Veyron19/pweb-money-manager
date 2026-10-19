@@ -31,7 +31,7 @@ body {
   margin: 24px auto;
 }
 
-.card {
+.panel {
   background: white;
   padding: 24px;
   margin-bottom: 20px;
@@ -39,25 +39,16 @@ body {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
 
-.card h2 {
+.panel h2 {
   margin-top: 0;
   color: #173c32;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.form-group.full {
-  grid-column: 1 / -1;
+  margin-bottom: 16px;
 }
 
 label {
@@ -86,20 +77,47 @@ button {
   border-radius: 7px;
   cursor: pointer;
   font: inherit;
-}
-
-.btn-primary {
   background: #246b50;
   color: white;
 }
 
-.btn-primary:hover {
+button:hover {
   background: #19533d;
 }
 
 .btn-delete {
   background: #fde8e7;
   color: #a52626;
+}
+
+.btn-delete:hover {
+  background: #fbd4d2;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border-left: 5px solid #246b50;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.summary-card p {
+  margin: 0 0 12px;
+  color: #65716c;
+}
+
+.summary-card h2 {
+  margin: 0;
+  font-size: 20px;
+  overflow-wrap: anywhere;
 }
 
 .transaction-list {
@@ -116,6 +134,7 @@ button {
   padding: 16px;
   border: 1px solid #e0e6e3;
   border-radius: 9px;
+  margin-bottom: 12px;
 }
 
 .transaction-info h3 {
@@ -148,16 +167,33 @@ button {
   padding: 20px;
 }
 
+.error-message {
+  color: #c03939;
+  font-size: 14px;
+  margin: 12px 0;
+}
+
+.error-message:empty {
+  display: none;
+}
+
+.footer {
+  padding: 16px;
+  text-align: center;
+  color: #65716c;
+  font-size: 14px;
+}
+
 @media (max-width: 600px) {
   .container {
     width: 94%;
   }
 
-  .card {
+  .panel {
     padding: 16px;
   }
 
-  .form-grid {
+  .summary-grid {
     grid-template-columns: 1fr;
   }
 

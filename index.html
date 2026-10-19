@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -16,10 +17,27 @@
   </header>
 
   <main class="container">
+    <section class="summary-grid">
+      <div class="summary-card">
+        <p>Total Pemasukan</p>
+        <h2 id="total-income">Rp0</h2>
+      </div>
+
+      <div class="summary-card">
+        <p>Total Pengeluaran</p>
+        <h2 id="total-expense">Rp0</h2>
+      </div>
+
+      <div class="summary-card">
+        <p>Saldo</p>
+        <h2 id="balance">Rp0</h2>
+      </div>
+    </section>
+
     <section class="panel">
       <h2>Tambah Transaksi</h2>
 
-      <form id="transaction-form">
+      <form id="transaction-form" novalidate>
         <div class="form-group">
           <label for="date">Tanggal</label>
           <input type="date" id="date" required>
@@ -64,6 +82,8 @@
             placeholder="Contoh: Penjualan hari ini"
           >
         </div>
+
+        <p id="error-message" class="error-message" role="alert"></p>
 
         <button type="submit">Tambah Transaksi</button>
       </form>

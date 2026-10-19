@@ -1,12 +1,11 @@
 # Proses Pengerjaan Money Manager
-
 Nama: Reza  
-NRP :5053251050  
+NRP: 5053251050  
 Kelas: M
 
 ## Checkpoint 1
 
-### Tahap Persiapan
+## Tahap Persiapan
 Menentukan persona Pedagang Kecil sebagai target pengguna aplikasi. Aplikasi dirancang untuk membantu pencatatan transaksi keuangan usaha menggunakan HTML, CSS, dan JavaScript.
 
 ## W1 - Tambah Transaksi
@@ -23,8 +22,21 @@ Menggunakan localStorage untuk menyimpan transaksi pada browser. Data yang tersi
 
 ## Pengujian CP1
 Melakukan pengujian penambahan transaksi, tampilan daftar, penghapusan dengan konfirmasi, dan penyimpanan data setelah halaman dimuat ulang.
-
 Hasil pengujian dicatat setelah setiap fitur dicoba.
 
-## Pengembangan Berikutnya
-Checkpoint berikutnya direncanakan mencakup W5 berupa ringkasan keuangan, W6 berupa validasi dengan pesan kesalahan di halaman, dan fitur khas persona Pedagang Kecil sesuai tahapan tugas.
+## Checkpoint 2
+
+## Pengembangan Tampilan
+Menyesuaikan tampilan Money Manager dengan tema Sage Green dan Cream agar terlihat lebih rapi dan nyaman digunakan. Perubahan warna dilakukan dengan tetap mempertahankan layout dan ukuran elemen yang sudah ada.
+
+## W5 - Ringkasan Keuangan
+Pengembangan diarahkan pada penyajian ringkasan pemasukan, pengeluaran, dan saldo berdasarkan transaksi yang tersimpan.
+
+## W6 - Validasi Input
+Pengembangan diarahkan pada pemeriksaan input transaksi dan penampilan pesan kesalahan pada halaman apabila data yang dimasukkan tidak sesuai.
+
+## Pengembangan Fitur Persona Pedagang Kecil
+Pengembangan selanjutnya diarahkan pada fitur yang mendukung pencatatan keuangan usaha kecil, sesuai dengan requirement tugas.
+
+## Pengujian dan Evaluasi
+Melakukan pengujian terhadap fitur yang telah dikembangkan untuk memastikan aplikasi berjalan sesuai requirement. Setiap fitur diperiksa berdasarkan hasil yang ditampilkan pada browser.
